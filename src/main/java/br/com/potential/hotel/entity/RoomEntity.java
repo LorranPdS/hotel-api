@@ -2,24 +2,42 @@ package br.com.potential.hotel.entity;
 
 import br.com.potential.hotel.enumeration.EnumStatusRoom;
 import br.com.potential.hotel.enumeration.EnumTypeRoom;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.List;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "room")
 public class RoomEntity {
 
     @Id
-    private Integer roomNumber;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private EnumStatusRoom status;
-    private BigDecimal pricePerNight;
-    private BigDecimal totalAmount;
-    private List<ExtraChargesEntity> extraCharges;
-    private String description;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private EnumTypeRoom type;
-    private List<GuestEntity> guests;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private EnumStatusRoom status;
+
+    @Column(nullable = false)
+    private BigDecimal pricePerNight;
+
+    @Column
+    private Integer qtdBedsAvailable;
+
+    @Column
+    private String description;
+
+    @OneToMany(mappedBy = "room")
+    private List<ReservationEntity> reservations;
 }

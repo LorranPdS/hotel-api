@@ -1,13 +1,33 @@
 package br.com.potential.hotel.entity;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
 import java.util.UUID;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "extracharges")
 public class ExtraChargesEntity {
 
-    private UUID chargeId;
-//    private ProductEntity product; // TODO: I'm going to get ProductEntity that is in supermarket-api using pom.xml
-    private String product;
-    private Double price;
-    private Integer quantity;
+    @Id
+    @GeneratedValue
+    @Column(columnDefinition = "uuid", updatable = false, nullable = false)
+    private UUID id;
 
+
+    @Column(nullable = false)
+    private String description; // exemplo: "Frigobar", "Estacionamento"
+
+    @Column(nullable = false)
+    private BigDecimal amount;
+
+    @ManyToOne
+    @JoinColumn(name = "reservation_id", nullable = false)
+    private ReservationEntity reservation;
 }
