@@ -21,6 +21,9 @@ public class GuestEntity {
     @Column
     private String email;
 
+    @Column
+    private boolean is_reservation_holder;
+
     @ManyToOne
     @JoinColumn(name = "reservation_id", nullable = false)
     private ReservationEntity reservation;
