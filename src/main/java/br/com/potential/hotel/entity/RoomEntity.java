@@ -19,7 +19,7 @@ public class RoomEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer number;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -1,9 +1,11 @@
 package br.com.potential.hotel.entity;
 
+import br.com.potential.hotel.dto.requests.ExtraChargesRequest;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.BeanUtils;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -30,4 +32,10 @@ public class ExtraChargesEntity {
     @ManyToOne
     @JoinColumn(name = "reservation_id", nullable = false)
     private ReservationEntity reservation;
+
+    public static ExtraChargesEntity of(ExtraChargesRequest extraChargesRequest){
+        var extraChargesEntity = new ExtraChargesEntity();
+        BeanUtils.copyProperties(extraChargesRequest, extraChargesEntity);
+        return extraChargesEntity;
+    }
 }
