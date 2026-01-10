@@ -4,11 +4,12 @@ import br.com.potential.hotel.entity.ReservationEntity;
 import lombok.Data;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 @Data
 public class ExtraChargesRequest {
 
     private String description;
     private BigDecimal amount;
-    private ReservationEntity reservation;
+    private UUID reservationId;
 }
